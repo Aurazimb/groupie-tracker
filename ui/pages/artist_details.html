@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ .Image }}" type="images">
+    <title>{{ .Name }}</title>
+    <style>
+        body {
+            background-color: black;
+            color: rgb(255, 255, 255);
+            font-family: 'Press Start 2P', cursive; 
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .artist-details {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .artist-details img {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 10px; 
+            border-radius: 50%; 
+            display: block; 
+            margin: 0 auto; 
+        }
+
+        h1, p {
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+        .back_to_main {
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="artist-details">
+        <img src="{{ .Image }}" alt="{{ .Name }}">
+        <h1>{{ .Name }}</h1>
+        <p>Members: {{ range .Members }}{{ . }}, {{ end }}</p>
+        <p>Creation Date: {{ .CreationDate }}</p>
+        <p>First Album: {{ .FirstAlbum }}</p>
+        <div class="artist-concerts">
+            <span>CONCERTS:</span>
+            {{ range $key, $value := .Relations.DatesLocations }}
+                <h4>{{ $key }}</h4>
+                <ul>
+                    {{ range $value }}
+                        <li>{{ . }}</li>
+                    {{ end }}
+                </ul>
+            {{ end }}
+        </div>
+        <div class="back_to_main">  
+            <a href="/">
+                    <h2>Back to main page</h2>   
+            </a>
+        </div>
+    </div>
+</body>
+</html>
